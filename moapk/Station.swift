@@ -13,20 +13,29 @@ class Station {
     //MARK: Properties
     
     var name: String
+    var location: Location
+    var lines: [String]
+    
     
     
     
     //MARK: Initialization
     
-    init?(name: String){
-        
-        //Initialization should fail if there is no name or if the rating is negative.
-        if name.isEmpty{
-            return nil
-        }
-        
+    init(name: String, location: Location, lines: [String]){
         
         //Initialize stored properties
         self.name = name
+        self.location = location
+        self.lines = lines
+    }
+}
+
+class Location {
+    var latitude: Float
+    var longitude: Float
+    
+    init(latitude: Float, longitude: Float){
+        self.latitude = latitude
+        self.longitude = longitude
     }
 }

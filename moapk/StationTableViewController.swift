@@ -58,7 +58,7 @@ class StationTableViewController: UITableViewController {
         let station = stations[indexPath.row]
         
 
-        cell.nameLabel.text = station.name
+        cell.nameLabel.text = "\(indexPath.row) \(station.name)"
 
         return cell
     }
@@ -99,30 +99,34 @@ class StationTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if(segue.identifier?.compare("showStationDetails") != nil){
+            guard let stationViewController = segue.destination as? StationViewController else {
+                fatalError("Unexpected destination \(segue.destination)")
+            }
+            guard let selectedStationCell = sender as? StationListTableViewCell else {
+                fatalError("Unexpected sender: \(String(describing: sender))")
+            }
+            guard let indexPath = tableView.indexPath(for: selectedStationCell) else {
+                fatalError("The selected cell is not displayed in the table.")
+            }
+            let selectedStation = stations[indexPath.row]
+            stationViewController.station = selectedStation
+        }
     }
-    */
+    
     
     //MARK: Private Methods
     
     private func loadSampleStations() {
         
-        guard let station1 = Station(name: "Station 1") else {
-            fatalError("Unable to instantiate station1")
+        for _ in 0...29{
+            let station = Station(name: "Station", location: Location(latitude: 48.134861, longitude: 16.283298), lines: ["A31","A32", "A33"])
+            stations.append(station)
         }
-        
-        guard let station2 = Station(name: "Station 2") else {
-            fatalError("Unable to instantiate station2")
-        }
-        
-        stations += [station1, station2]
-    
     }
-
 }

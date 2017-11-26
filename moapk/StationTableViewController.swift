@@ -8,17 +8,23 @@
 
 import UIKit
 
-class StationTableViewController: UITableViewController {
+class StationTableViewController: UITableViewController, StationDelegate {
+    
+    
     //MARK: Properties
     
     var stations = [Station]()
+    var stationService : StationService? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Load sample data.
+        //loadSampleStations()
+        stationService = StationService(delegate: self)
+        stationService!.load()
         
-        loadSampleStations()
+        self.refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: UIControlEvents.valueChanged)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -127,6 +133,15 @@ class StationTableViewController: UITableViewController {
         for _ in 0...29{
             let station = Station(name: "Station", location: Location(latitude: 48.134861, longitude: 16.283298), lines: ["A31","A32", "A33"])
             stations.append(station)
+        }
+    }
+    
+    //StationDelegate:
+    func dataLoadingFinished(_ data: [Station]) {
+        stations = data
+        DispatchQueue.main.async{
+            self.tableView.reloadData()
+            self.refreshControl?.endRefreshing()
         }
     }
 }

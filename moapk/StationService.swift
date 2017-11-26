@@ -10,6 +10,10 @@ import Foundation
 
 struct StationService {
     
+    let delegate : StationDelegate
+    init(delegate:StationDelegate){
+        self.delegate = delegate
+    }
     
     func load(){
         let urlString = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:OEFFHALTESTOGD&srsName=EPSG:4326&outputFormat=json"
@@ -52,7 +56,7 @@ struct StationService {
     }
     
     private func parseFeatures(_ features: [[String:Any]]){
-        var stations=[Station]()
+        var stations=[String:Station]()
         
         for feature in features {
             guard let properties = feature["properties"] as? [String:Any] else {
@@ -75,20 +79,24 @@ struct StationService {
                 print("Cannot cast lines as String.")
                 return
             }
-            guard let lng = coordinates[0] as? Double, let lat = coordinates[1] as? Double else {
+            guard let lng = coordinates[0] as? Float, let lat = coordinates[1] as? Float else {
                 print("Cannot cast coordinates.")
                 return
             }
             
             let linesArray = linesAsString.components(separatedBy: ",")
-            //stations.append
+            
+            if stations.index(forKey: name) == nil {
+                stations[name] = Station(name: name, location: Location(latitude: lat, longitude: lng), lines: linesArray)
+            } else {
+                stations[name]?.lines += linesArray
+            }
+            
         }
     }
+    //already accomplished by dictionary
     //let stationsWithoutDuplicates = mergeStations
     
-    var delegate : StationDelegate?
-    init(delegate:StationDelegate){
-        self.delegate = delegate
-    }
     delegate.dataLoadingFinished()
+    return stations
 }

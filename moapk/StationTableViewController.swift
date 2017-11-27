@@ -68,8 +68,7 @@ class StationTableViewController: UITableViewController, StationDelegate {
         
         let station = stations[indexPath.row]
         
-
-        cell.nameLabel.text = "\(indexPath.row) \(station.name)"
+        cell.nameLabel.text = "\(station.name)"
 
         return cell
     }
@@ -133,13 +132,15 @@ class StationTableViewController: UITableViewController, StationDelegate {
     
     //MARK: Private Methods
     
-    private func loadSampleStations() {
-        
-        for _ in 0...29{
-            let station = Station(name: "Station", location: Location(latitude: 48.134861, longitude: 16.283298), lines: ["A31","A32", "A33"])
-            stations.append(station)
-        }
-    }
+    //private func loadSampleStations() {
+    //
+    //    for _ in 0...29{
+    //        let station = Station(name: "Station", location: Location(latitude: 48.134861, longitude: 16.283298), lines: 
+    //["A31","A32", "A33"])
+    //        stations.append(station)
+    //    }
+    //}
+    
     
     //StationDelegate:
     func dataLoadingFinished(_ data: [Station]) {

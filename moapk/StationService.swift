@@ -94,12 +94,18 @@ struct StationService {
             }
             
         }
-        delegate?.dataLoadingFinished(stations)
+        
+        let allStations = Array(stations.values.map{$0})
+        let usStations = allStations.filter{$0.isUBahnOrSBahn()}
+        //for station in allStations{
+        //    if station.isUBahnOrSBahn(){
+        //        usStations.append(station)
+        //    }
+        //}
+        
+        delegate?.dataLoadingFinished(usStations)
     }
     //already accomplished by dictionary
     //let stationsWithoutDuplicates = mergeStations
-    
-    //delegate.dataLoadingFinished(stations)
-    
     
 }

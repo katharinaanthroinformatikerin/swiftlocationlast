@@ -141,9 +141,9 @@ class StationTableViewController: UITableViewController, StationDelegate {
     }
     
     //StationDelegate:
-    func dataLoadingFinished(_ data: [String: Station]) {
+    func dataLoadingFinished(_ data: [Station]) {
         
-        stations = Array(data.values.map{$0})
+        stations = data
         DispatchQueue.main.async{
             self.tableView.reloadData()
             self.refreshControl?.endRefreshing()

@@ -17,7 +17,6 @@
 		31A859041FBF321D0007C34E /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A859031FBF321D0007C34E /* Station.swift */; };
 		7B7AA58B1FCB3378004F8D4C /* StationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7AA58A1FCB3378004F8D4C /* StationDelegate.swift */; };
 		7B7AA58D1FCB369B004F8D4C /* StationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7AA58C1FCB369B004F8D4C /* StationService.swift */; };
-		7B8A11121FCB582B007E12D2 /* StationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8A11111FCB582B007E12D2 /* StationType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +32,6 @@
 		31A859031FBF321D0007C34E /* Station.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		7B7AA58A1FCB3378004F8D4C /* StationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDelegate.swift; sourceTree = "<group>"; };
 		7B7AA58C1FCB369B004F8D4C /* StationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationService.swift; sourceTree = "<group>"; };
-		7B8A11111FCB582B007E12D2 /* StationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +71,6 @@
 				31A859031FBF321D0007C34E /* Station.swift */,
 				7B7AA58A1FCB3378004F8D4C /* StationDelegate.swift */,
 				7B7AA58C1FCB369B004F8D4C /* StationService.swift */,
-				7B8A11111FCB582B007E12D2 /* StationType.swift */,
 				31A858F11FBF24390007C34E /* Main.storyboard */,
 				31A858F41FBF24390007C34E /* Assets.xcassets */,
 				31A858F61FBF24390007C34E /* LaunchScreen.storyboard */,
@@ -154,7 +151,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B8A11121FCB582B007E12D2 /* StationType.swift in Sources */,
 				31A859021FBF2F000007C34E /* StationTableViewController.swift in Sources */,
 				7B7AA58D1FCB369B004F8D4C /* StationService.swift in Sources */,
 				31A859041FBF321D0007C34E /* Station.swift in Sources */,

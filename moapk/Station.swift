@@ -15,9 +15,6 @@ class Station {
     var name: String
     var location: Location
     var lines: [String]
-    //var type: StationType
-    
-    
     
     
     //MARK: Initialization
@@ -28,6 +25,28 @@ class Station {
         self.name = name
         self.location = location
         self.lines = lines
+    }
+    
+    func isUBahn() -> Bool {
+        for line in lines {
+            if(line.contains("U")){
+                return true
+            }
+        }
+        return false
+    }
+    
+    func isSBahn() -> Bool {
+        for line in lines {
+            if(line.contains("U")){
+                return true
+            }
+        }
+        return false
+    }
+    
+    func isUBahnOrSBahn() -> Bool{
+        return isSBahn() || isUBahn()
     }
 }
 

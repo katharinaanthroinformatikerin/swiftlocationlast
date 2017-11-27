@@ -15,7 +15,7 @@
 		31A859001FBF2A110007C34E /* StationListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A858FF1FBF2A110007C34E /* StationListTableViewCell.swift */; };
 		31A859021FBF2F000007C34E /* StationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A859011FBF2F000007C34E /* StationTableViewController.swift */; };
 		31A859041FBF321D0007C34E /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A859031FBF321D0007C34E /* Station.swift */; };
-		7B7AA58D1FCB369B004F8D4C /* StationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7AA58C1FCB369B004F8D4C /* StationService.swift */; };
+		7B7AA58D1FCB369B004F8D4C /* StationLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7AA58C1FCB369B004F8D4C /* StationLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +29,7 @@
 		31A858FF1FBF2A110007C34E /* StationListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationListTableViewCell.swift; sourceTree = "<group>"; };
 		31A859011FBF2F000007C34E /* StationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationTableViewController.swift; sourceTree = "<group>"; };
 		31A859031FBF321D0007C34E /* Station.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
-		7B7AA58C1FCB369B004F8D4C /* StationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationService.swift; sourceTree = "<group>"; };
+		7B7AA58C1FCB369B004F8D4C /* StationLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,7 +67,7 @@
 				31A858FF1FBF2A110007C34E /* StationListTableViewCell.swift */,
 				31A859011FBF2F000007C34E /* StationTableViewController.swift */,
 				31A859031FBF321D0007C34E /* Station.swift */,
-				7B7AA58C1FCB369B004F8D4C /* StationService.swift */,
+				7B7AA58C1FCB369B004F8D4C /* StationLoader.swift */,
 				31A858F11FBF24390007C34E /* Main.storyboard */,
 				31A858F41FBF24390007C34E /* Assets.xcassets */,
 				31A858F61FBF24390007C34E /* LaunchScreen.storyboard */,
@@ -149,7 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				31A859021FBF2F000007C34E /* StationTableViewController.swift in Sources */,
-				7B7AA58D1FCB369B004F8D4C /* StationService.swift in Sources */,
+				7B7AA58D1FCB369B004F8D4C /* StationLoader.swift in Sources */,
 				31A859041FBF321D0007C34E /* Station.swift in Sources */,
 				31A858F01FBF24390007C34E /* StationViewController.swift in Sources */,
 				31A859001FBF2A110007C34E /* StationListTableViewCell.swift in Sources */,

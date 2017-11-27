@@ -14,15 +14,15 @@ class StationTableViewController: UITableViewController, StationDelegate {
     //MARK: Properties
     
     var stations = [Station]()
-    var stationService : StationService? = nil
+    var stationLoader : StationLoader? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Load sample data.
         //loadSampleStations()
-        stationService = StationService(delegate: self)
-        stationService?.load()
+        stationLoader = StationLoader(delegate: self)
+        stationLoader?.load()
         
         self.refreshControl?.addTarget(self, action: #selector(StationTableViewController.refresh(_:)), for: UIControlEvents.valueChanged)
 
@@ -35,7 +35,7 @@ class StationTableViewController: UITableViewController, StationDelegate {
     
     @objc func refresh(_ sender: Any){
         print("in function refresh")
-        stationService?.load()
+        stationLoader?.load()
     }
     
     override func didReceiveMemoryWarning() {

@@ -14,7 +14,7 @@ protocol StationDelegate {
     func dataLoadingFinished(_ data: [Station])
 }
 
-struct StationService {
+struct StationLoader {
     
     var delegate : StationDelegate?
     init(delegate:StationDelegate){

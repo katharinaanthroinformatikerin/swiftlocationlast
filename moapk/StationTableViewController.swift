@@ -143,7 +143,7 @@ class StationTableViewController: UITableViewController, StationDelegate {
     
     
     //StationDelegate:
-    func dataLoadingFinished(_ data: [Station]) {
+    func finishedLoadingStations(_ data: [Station]) {
         
         stations = data
         DispatchQueue.main.async{

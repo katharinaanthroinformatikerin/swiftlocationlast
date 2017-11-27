@@ -76,8 +76,12 @@ struct StationService {
                 print("Cannot parse coordinates")
                 return
             }
-            guard let linesAsString = hlinien as? String, let name = htxt as? String else {
+            guard let linesAsString = hlinien as? String else {
                 print("Cannot cast lines as String.")
+                return
+            }
+            guard let name = htxt as? String else {
+                print("Cannot cast name as String.")
                 return
             }
             guard let lng = coordinates[0] as? Float, let lat = coordinates[1] as? Float else {
@@ -85,27 +89,30 @@ struct StationService {
                 return
             }
             
-            let linesArray = linesAsString.components(separatedBy: ",")
+            let crudeLinesArray = linesAsString.components(separatedBy: ",")
+            let linesArray = crudeLinesArray.map{$0.trimmingCharacters(in: .whitespacesAndNewlines)}
+            
+            //for line in crudeLinesArray{
+            //    let cleanLine = line.trimmingCharacters(in: .whitespacesAndNewlines)
+            //    linesArray.append(cleanLine)
+            //}
+    
             
             if stations.index(forKey: name) == nil {
                 stations[name] = Station(name: name, location: Location(latitude: lat, longitude: lng), lines: linesArray)
             } else {
                 stations[name]?.lines += linesArray
             }
-            
         }
+        
         
         let allStations = Array(stations.values.map{$0})
         let usStations = allStations.filter{$0.isUBahnOrSBahn()}
-        //for station in allStations{
-        //    if station.isUBahnOrSBahn(){
-        //        usStations.append(station)
-        //    }
-        //}
+        for station in usStations{
+            //removes duplicates
+            station.lines = Array(Set(station.lines))
+        }
         
         delegate?.dataLoadingFinished(usStations)
     }
-    //already accomplished by dictionary
-    //let stationsWithoutDuplicates = mergeStations
-    
 }

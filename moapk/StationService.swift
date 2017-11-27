@@ -119,6 +119,7 @@ struct StationService {
             station.lines = Array(Set(station.lines))
         }
         
-        delegate?.dataLoadingFinished(usStations)
+        //sortiert in alphabetischer Reihenfolge
+        delegate?.dataLoadingFinished(usStations.sorted{ $0.name < $1.name })
     }
 }

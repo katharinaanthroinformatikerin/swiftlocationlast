@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "moapk/StationService.swift"
-            timestampString = "533476053.533321"
+            timestampString = "533478001.01488"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "parseFeatures(_:)"
             landmarkType = "7">
          </BreakpointContent>

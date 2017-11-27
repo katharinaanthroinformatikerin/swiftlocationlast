@@ -8,6 +8,12 @@
 
 import Foundation
 
+
+//delegate, um Controller über beim Model aufgetretene Ereignisse zu informieren
+protocol StationDelegate {
+    func dataLoadingFinished(_ data: [Station])
+}
+
 struct StationService {
     
     var delegate : StationDelegate?

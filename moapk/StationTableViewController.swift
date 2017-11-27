@@ -22,9 +22,9 @@ class StationTableViewController: UITableViewController, StationDelegate {
         // Load sample data.
         //loadSampleStations()
         stationService = StationService(delegate: self)
-        stationService!.load()
+        stationService?.load()
         
-        self.refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: UIControlEvents.valueChanged)
+        self.refreshControl?.addTarget(self, action: #selector(StationTableViewController.refresh(_:)), for: UIControlEvents.valueChanged)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -33,7 +33,8 @@ class StationTableViewController: UITableViewController, StationDelegate {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
-    @objc func refresh(sender: Any){
+    @objc func refresh(_ sender: Any){
+        print("in function refresh")
         stationService?.load()
     }
     

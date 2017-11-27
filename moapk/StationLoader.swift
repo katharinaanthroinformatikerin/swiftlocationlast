@@ -116,36 +116,6 @@ struct StationLoader {
         for station in usStations{
             //removes duplicate lines by transforming into a set and then back to an array
             station.lines = Array(Set(station.lines))
-            //let unsortedLines = Array(Set(station.lines))
-            //let sortingPreference = "SU".characters.map {$0}
-            //var subArray1 = [String]()
-            //var subArray2 = [String]()
-            
-            //unsortedLines.forEach{
-            //    if $0.isEmpty || !sortingPreference.contains($0[$0.startIndex]){
-            //        subArray2.append($0)
-            //    } else {
-            //        subArray1.append($0)
-            //    }
-            //}
-            
-            //subArray1.sort{ str1, str2 in
-            //    let firstChar1 = str1[str1.startIndex]
-            //    let firstChar2 = str2[str2.startIndex]
-                
-            //    let index1 = sortingPreference.index(of: firstChar1)!
-            //    let index2 = sortingPreference.index(of: firstChar2)!
-                
-            //    if index1 != index2 {
-            //        return index1 < index2
-            //    } else {
-            //        return str1.compare(str2, options: .numeric) == .orderedAscending
-            //    }
-            //}
-            
-            //subArray2.sort { $0.compare($1, options: .numeric) == .orderedAscending}
-            
-            //station.lines = subArray1 + subArray2
         }
         
         //sortiert in alphabetischer Reihenfolge

@@ -15,7 +15,7 @@ class Station {
     var name: String
     var location: Location
     var lines: [String]
-    var type: StationType
+    //var type: StationType
     
     
     

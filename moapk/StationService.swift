@@ -10,7 +10,7 @@ import Foundation
 
 struct StationService {
     
-    let delegate : StationDelegate
+    var delegate : StationDelegate?
     init(delegate:StationDelegate){
         self.delegate = delegate
     }
@@ -33,6 +33,7 @@ struct StationService {
             }
             guard let data = data else {
                 print("Couldn't get data.")
+                return
             }
             
             guard let json = try? JSONSerialization.jsonObject(with: data, options: []) else {
@@ -93,10 +94,12 @@ struct StationService {
             }
             
         }
+        delegate?.dataLoadingFinished(stations)
     }
     //already accomplished by dictionary
     //let stationsWithoutDuplicates = mergeStations
     
-    delegate.dataLoadingFinished()
-    return stations
+    //delegate.dataLoadingFinished(stations)
+    
+    
 }

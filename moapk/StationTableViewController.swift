@@ -34,7 +34,7 @@ class StationTableViewController: UITableViewController, StationDelegate {
     }
     
     @objc func refresh(sender: Any){
-        stationsService?.load()
+        stationService?.load()
     }
     
     override func didReceiveMemoryWarning() {
@@ -141,8 +141,9 @@ class StationTableViewController: UITableViewController, StationDelegate {
     }
     
     //StationDelegate:
-    func dataLoadingFinished(_ data: [Station]) {
-        stations = data
+    func dataLoadingFinished(_ data: [String: Station]) {
+        
+        stations = Array(data.values.map{$0})
         DispatchQueue.main.async{
             self.tableView.reloadData()
             self.refreshControl?.endRefreshing()

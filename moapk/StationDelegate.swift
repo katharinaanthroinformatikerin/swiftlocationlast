@@ -8,5 +8,5 @@
 
 //delegate, um Controller über beim Model aufgetretene Ereignisse zu informieren
 protocol StationDelegate {
-    func dataLoadingFinished(_ data: [Station])
+    func dataLoadingFinished(_ data: [String: Station])
 }

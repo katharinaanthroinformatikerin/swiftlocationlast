@@ -31,9 +31,9 @@ class StationTableViewController: UITableViewController, StationDelegate {
         self.refreshControl?.addTarget(self, action: #selector(StationTableViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         
         //Setting default values for app settings
-        UserDefaults.standard.register(defaults: ["strain_preferences" : true, "subway_preferences" : true])
-        strainPrefs = UserDefaults.standard.bool(forKey: "strain_preferences")
-        subwayPrefs = UserDefaults.standard.bool(forKey: "subway_preferences")
+        UserDefaults.standard.register(defaults: ["strain_preference" : true, "subway_preference" : true])
+        strainPrefs = UserDefaults.standard.bool(forKey: "strain_preference")
+        subwayPrefs = UserDefaults.standard.bool(forKey: "subway_preference")
         
         //Registering ViewController for updates concerning the app settings
         NotificationCenter.default.addObserver(forName: UserDefaults.didChangeNotification, object: nil, queue: nil, using: settingsChanged)
@@ -47,8 +47,8 @@ class StationTableViewController: UITableViewController, StationDelegate {
     
     //What to do when app settings change
     func settingsChanged(notification: Notification){
-        strainPrefs = UserDefaults.standard.bool(forKey: "strain_preferences")
-        subwayPrefs = UserDefaults.standard.bool(forKey: "subway_preferences")
+        strainPrefs = UserDefaults.standard.bool(forKey: "strain_preference")
+        subwayPrefs = UserDefaults.standard.bool(forKey: "subway_preference")
         
         setStationsSetInPrefs(strainandsubway: stations)
         self.tableView.reloadData()

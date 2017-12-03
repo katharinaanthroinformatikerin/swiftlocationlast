@@ -38,7 +38,7 @@ class Station {
     
     func isSBahn() -> Bool {
         for line in lines {
-            if(line.contains("U")){
+            if(line.contains("S")){
                 return true
             }
         }

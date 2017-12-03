@@ -19,7 +19,12 @@ class StationTableViewController: UITableViewController, StationDelegate {
     
     var strainPrefs : Bool?
     var subwayPrefs : Bool?
-
+    
+    //unregistering updates when ViewController is destroyed
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UserDefaults.didChangeNotification, object: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,9 +32,15 @@ class StationTableViewController: UITableViewController, StationDelegate {
         UserDefaults.standard.register(defaults: ["strain_preference" : true, "subway_preference" : true])
         strainPrefs = UserDefaults.standard.bool(forKey: "strain_preference")
         subwayPrefs = UserDefaults.standard.bool(forKey: "subway_preference")
+        print("1 Preferences")
+        print(strainPrefs)
+        print(subwayPrefs)
         
         //Registering ViewController for updates concerning the app settings
         NotificationCenter.default.addObserver(forName: UserDefaults.didChangeNotification, object: nil, queue: nil, using: settingsChanged)
+        print("2 Preferences")
+        print(strainPrefs)
+        print(subwayPrefs)
         
         // Load sample data.
         //loadSampleStations()
@@ -47,17 +58,23 @@ class StationTableViewController: UITableViewController, StationDelegate {
     
     //What to do when app settings change
     func settingsChanged(notification: Notification){
+        
+        UserDefaults.standard.synchronize()
+        
+        print("Settings changed")
+        print(UserDefaults.standard.bool(forKey: "strain_preference"))
+        print(UserDefaults.standard.bool(forKey: "subway_preference"))
+        
         strainPrefs = UserDefaults.standard.bool(forKey: "strain_preference")
         subwayPrefs = UserDefaults.standard.bool(forKey: "subway_preference")
+        print("3 Preferences")
+        print(strainPrefs)
+        print(subwayPrefs)
         
-        setStationsSetInPrefs(strainandsubway: stations)
+        setStationsSetInPrefs(using: stations)
         self.tableView.reloadData()
     }
     
-    //unregistering updates when ViewController is destroyed
-    deinit{
-        NotificationCenter.default.removeObserver(self, name: UserDefaults.didChangeNotification, object: nil)
-    }
     
     @objc func refresh(_ sender: Any){
         print("in function refresh")
@@ -94,6 +111,15 @@ class StationTableViewController: UITableViewController, StationDelegate {
         let station = stationsSetInPrefs[indexPath.row]
         
         cell.nameLabel.text = "\(station.name)"
+        if (station.isUBahnOrSBahn()) {
+            //cell.iconImageView.image = UIImage(named: "us-bahn")
+        }
+        else if (station.isUBahn()) {
+            //cell.iconImageView.image = UIImage(named: "u-bahn")
+        }
+        else if (station.isSBahn()){
+            //cell.iconImageView.image = UIImage(named: "s-bahn")
+        }
 
         return cell
     }
@@ -149,7 +175,7 @@ class StationTableViewController: UITableViewController, StationDelegate {
             guard let indexPath = tableView.indexPath(for: selectedStationCell) else {
                 fatalError("The selected cell is not displayed in the table.")
             }
-            let selectedStation = stations[indexPath.row]
+            let selectedStation = stationsSetInPrefs[indexPath.row]
             stationViewController.station = selectedStation
         }
     }
@@ -172,7 +198,9 @@ class StationTableViewController: UITableViewController, StationDelegate {
         
         stations = data
         
-        setStationsSetInPrefs(strainandsubway: stations)
+        setStationsSetInPrefs(using: data)
+        
+        
         
         DispatchQueue.main.async{
             self.tableView.reloadData()
@@ -180,22 +208,27 @@ class StationTableViewController: UITableViewController, StationDelegate {
         }
     }
     
-    func setStationsSetInPrefs(strainandsubway: [Station]){
+    func setStationsSetInPrefs(using usstations: [Station]){
+        print("4 Preferences")
+        print(strainPrefs)
+        print(subwayPrefs)
+        stationsSetInPrefs = [Station]()
         if (strainPrefs == true && subwayPrefs == true) {
-            stationsSetInPrefs = strainandsubway
+            stationsSetInPrefs = usstations
+            
         } else if (strainPrefs == true && subwayPrefs == false) {
-            for station in strainandsubway{
+            for station in usstations{
                 if (station.isSBahn()){
                     stationsSetInPrefs.append(station)
                 }
             }
         } else if (strainPrefs == false && subwayPrefs == true) {
-            for station in strainandsubway {
+            for station in usstations {
                 if(station.isUBahn()){
                     stationsSetInPrefs.append(station)
                 }
             }
-        } else if (strainPrefs == false && subwayPrefs == false){
+        } else {
             stationsSetInPrefs = [Station]()
         }
     }

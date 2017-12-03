@@ -23,13 +23,6 @@ class StationTableViewController: UITableViewController, StationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Load sample data.
-        //loadSampleStations()
-        stationLoader = StationLoader(delegate: self)
-        stationLoader?.load()
-        
-        self.refreshControl?.addTarget(self, action: #selector(StationTableViewController.refresh(_:)), for: UIControlEvents.valueChanged)
-        
         //Setting default values for app settings
         UserDefaults.standard.register(defaults: ["strain_preference" : true, "subway_preference" : true])
         strainPrefs = UserDefaults.standard.bool(forKey: "strain_preference")
@@ -37,7 +30,14 @@ class StationTableViewController: UITableViewController, StationDelegate {
         
         //Registering ViewController for updates concerning the app settings
         NotificationCenter.default.addObserver(forName: UserDefaults.didChangeNotification, object: nil, queue: nil, using: settingsChanged)
-
+        
+        // Load sample data.
+        //loadSampleStations()
+        stationLoader = StationLoader(delegate: self)
+        stationLoader?.load()
+        
+        self.refreshControl?.addTarget(self, action: #selector(StationTableViewController.refresh(_:)), for: UIControlEvents.valueChanged)
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

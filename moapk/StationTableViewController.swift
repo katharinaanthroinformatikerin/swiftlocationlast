@@ -112,13 +112,13 @@ class StationTableViewController: UITableViewController, StationDelegate {
         
         cell.nameLabel.text = "\(station.name)"
         if (station.isUBahnOrSBahn()) {
-            //cell.iconImageView.image = UIImage(named: "us-bahn")
+            cell.iconImageView.image = UIImage(named: "image_subahn")
         }
         else if (station.isUBahn()) {
-            //cell.iconImageView.image = UIImage(named: "u-bahn")
+            cell.iconImageView.image = UIImage(named: "image_ubahn")
         }
         else if (station.isSBahn()){
-            //cell.iconImageView.image = UIImage(named: "s-bahn")
+            cell.iconImageView.image = UIImage(named: "image_bahn")
         }
 
         return cell

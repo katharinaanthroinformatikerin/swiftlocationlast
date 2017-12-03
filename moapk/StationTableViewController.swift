@@ -14,10 +14,22 @@ class StationTableViewController: UITableViewController, StationDelegate {
     //MARK: Properties
     
     var stations = [Station]()
+    var stationsSetInPrefs = [Station]()
     var stationLoader : StationLoader? = nil
+    
+    var strainPrefs : Bool?
+    var subwayPrefs : Bool?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Setting default values for app settings
+        UserDefaults.standard.register(defaults: ["strain_preference" : true, "subway_preference" : true])
+        strainPrefs = UserDefaults.standard.bool(forKey: "strain_preference")
+        subwayPrefs = UserDefaults.standard.bool(forKey: "subway_preference")
+        
+        //Registering ViewController for updates concerning the app settings
+        NotificationCenter.default.addObserver(forName: UserDefaults.didChangeNotification, object: nil, queue: nil, using: settingsChanged)
         
         // Load sample data.
         //loadSampleStations()
@@ -25,12 +37,26 @@ class StationTableViewController: UITableViewController, StationDelegate {
         stationLoader?.load()
         
         self.refreshControl?.addTarget(self, action: #selector(StationTableViewController.refresh(_:)), for: UIControlEvents.valueChanged)
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    //What to do when app settings change
+    func settingsChanged(notification: Notification){
+        strainPrefs = UserDefaults.standard.bool(forKey: "strain_preference")
+        subwayPrefs = UserDefaults.standard.bool(forKey: "subway_preference")
+        
+        setStationsSetInPrefs(strainandsubway: stations)
+        self.tableView.reloadData()
+    }
+    
+    //unregistering updates when ViewController is destroyed
+    deinit{
+        NotificationCenter.default.removeObserver(self, name: UserDefaults.didChangeNotification, object: nil)
     }
     
     @objc func refresh(_ sender: Any){
@@ -50,8 +76,8 @@ class StationTableViewController: UITableViewController, StationDelegate {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return stations.count
+        // return the number of rows
+        return stationsSetInPrefs.count
     }
 
     
@@ -65,8 +91,7 @@ class StationTableViewController: UITableViewController, StationDelegate {
         }
         
         //Fetches the appropriate station for the data source layout.
-        
-        let station = stations[indexPath.row]
+        let station = stationsSetInPrefs[indexPath.row]
         
         cell.nameLabel.text = "\(station.name)"
 
@@ -146,9 +171,32 @@ class StationTableViewController: UITableViewController, StationDelegate {
     func finishedLoadingStations(_ data: [Station]) {
         
         stations = data
+        
+        setStationsSetInPrefs(strainandsubway: stations)
+        
         DispatchQueue.main.async{
             self.tableView.reloadData()
             self.refreshControl?.endRefreshing()
+        }
+    }
+    
+    func setStationsSetInPrefs(strainandsubway: [Station]){
+        if (strainPrefs == true && subwayPrefs == true) {
+            stationsSetInPrefs = strainandsubway
+        } else if (strainPrefs == true && subwayPrefs == false) {
+            for station in strainandsubway{
+                if (station.isSBahn()){
+                    stationsSetInPrefs.append(station)
+                }
+            }
+        } else if (strainPrefs == false && subwayPrefs == true) {
+            for station in strainandsubway {
+                if(station.isUBahn()){
+                    stationsSetInPrefs.append(station)
+                }
+            }
+        } else if (strainPrefs == false && subwayPrefs == false){
+            stationsSetInPrefs = [Station]()
         }
     }
 }

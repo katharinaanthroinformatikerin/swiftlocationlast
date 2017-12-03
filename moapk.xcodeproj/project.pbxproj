@@ -16,6 +16,7 @@
 		31A859021FBF2F000007C34E /* StationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A859011FBF2F000007C34E /* StationTableViewController.swift */; };
 		31A859041FBF321D0007C34E /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A859031FBF321D0007C34E /* Station.swift */; };
 		7B7AA58D1FCB369B004F8D4C /* StationLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7AA58C1FCB369B004F8D4C /* StationLoader.swift */; };
+		7BE992351FD34D2C00630B97 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7BE992341FD34D2C00630B97 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		31A859011FBF2F000007C34E /* StationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationTableViewController.swift; sourceTree = "<group>"; };
 		31A859031FBF321D0007C34E /* Station.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		7B7AA58C1FCB369B004F8D4C /* StationLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationLoader.swift; sourceTree = "<group>"; };
+		7BE992341FD34D2C00630B97 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +48,7 @@
 		31A858E11FBF24390007C34E = {
 			isa = PBXGroup;
 			children = (
+				7BE992341FD34D2C00630B97 /* Settings.bundle */,
 				31A858EC1FBF24390007C34E /* moapk */,
 				31A858EB1FBF24390007C34E /* Products */,
 			);
@@ -135,6 +138,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BE992351FD34D2C00630B97 /* Settings.bundle in Resources */,
 				31A858F81FBF24390007C34E /* LaunchScreen.storyboard in Resources */,
 				31A858F51FBF24390007C34E /* Assets.xcassets in Resources */,
 				31A858F31FBF24390007C34E /* Main.storyboard in Resources */,

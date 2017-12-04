@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreLocation
 
-class StationTableViewController: UITableViewController, StationDelegate {
+class StationTableViewController: UITableViewController, StationDelegate, CLLocationManagerDelegate {
     
     
     //MARK: Properties
@@ -19,6 +20,11 @@ class StationTableViewController: UITableViewController, StationDelegate {
     
     var strainPrefs : Bool?
     var subwayPrefs : Bool?
+    
+    var locationManager = CLLocationManager()
+    
+    @IBOutlet weak var heading: UILabel!
+    @IBOutlet weak var location: UILabel!
     
     //unregistering updates when ViewController is destroyed
     deinit {
@@ -42,6 +48,8 @@ class StationTableViewController: UITableViewController, StationDelegate {
         print(strainPrefs)
         print(subwayPrefs)
         
+        
+        
         // Load sample data.
         //loadSampleStations()
         stationLoader = StationLoader(delegate: self)
@@ -49,6 +57,7 @@ class StationTableViewController: UITableViewController, StationDelegate {
         
         self.refreshControl?.addTarget(self, action: #selector(StationTableViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         
+        locationSetup()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -59,7 +68,7 @@ class StationTableViewController: UITableViewController, StationDelegate {
     //What to do when app settings change
     func settingsChanged(notification: Notification){
         
-        UserDefaults.standard.synchronize()
+        //UserDefaults.standard.synchronize()
         
         print("Settings changed")
         print(UserDefaults.standard.bool(forKey: "strain_preference"))
@@ -73,6 +82,43 @@ class StationTableViewController: UITableViewController, StationDelegate {
         
         setStationsSetInPrefs(using: stations)
         self.tableView.reloadData()
+    }
+    
+    func locationSetup(){
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        locationManager.distanceFilter = 50 // meter
+        locationManager.requestWhenInUseAuthorization()
+        
+        print(locationManager.location?.coordinate as Any)
+        
+        /*
+        location.text = ""
+        heading.text = ""
+
+        if let l = locationManager.location {
+            location.text = "\(l)"
+        }
+        if let h = locationManager.heading {
+            heading.text = "\(h)"
+        }*/
+        
+        if CLLocationManager.locationServicesEnabled(){
+                        locationManager.startUpdatingLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        var currentLocation : CLLocationCoordinate2D = locationManager.location!.coordinate
+        if let l = locations.last {
+            location.text = "\(l)"
+        } else {
+            location.text = ""
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: [CLLocation]){
+    
     }
     
     
@@ -111,14 +157,15 @@ class StationTableViewController: UITableViewController, StationDelegate {
         let station = stationsSetInPrefs[indexPath.row]
         
         cell.nameLabel.text = "\(station.name)"
-        if (station.isUBahnOrSBahn()) {
+        
+        if (station.isSBahn() && station.isUBahn()) {
             cell.iconImageView.image = UIImage(named: "image_subahn")
         }
         else if (station.isUBahn()) {
             cell.iconImageView.image = UIImage(named: "image_ubahn")
         }
         else if (station.isSBahn()){
-            cell.iconImageView.image = UIImage(named: "image_bahn")
+            cell.iconImageView.image = UIImage(named: "image_sbahn")
         }
 
         return cell

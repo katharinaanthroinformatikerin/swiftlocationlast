@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class Station {
     
@@ -15,6 +16,7 @@ class Station {
     var name: String
     var location: Location
     var lines: [String]
+    var distance: Double?
     
     
     //MARK: Initialization
@@ -48,6 +50,17 @@ class Station {
     func isUBahnOrSBahn() -> Bool{
         return isSBahn() || isUBahn()
     }
+    
+    
+    func setDistance(latitude: Float, longitude: Float){
+        
+        let loc = CLLocation(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
+        
+        let loc2 = CLLocation(latitude: CLLocationDegrees(self.location.latitude), longitude: CLLocationDegrees(self.location.longitude))
+        
+        self.distance = loc.distance(from: loc2)
+    }
+    
 }
 
 class Location {

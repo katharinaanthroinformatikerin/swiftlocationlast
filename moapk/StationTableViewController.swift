@@ -104,16 +104,29 @@ class StationTableViewController: UITableViewController, StationDelegate, CLLoca
         }*/
         
         if CLLocationManager.locationServicesEnabled(){
-                        locationManager.startUpdatingLocation()
+            locationManager.startUpdatingLocation()
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        var currentLocation : CLLocationCoordinate2D = locationManager.location!.coordinate
-        if let l = locations.last {
-            location.text = "\(l)"
-        } else {
-            location.text = ""
+        //var currentLocation : CLLocationCoordinate2D = locationManager.location!.coordinate
+        
+        var lat : Float
+        var lng : Float
+        if let l = locations.last{
+           lat = Float(l.coordinate.latitude)
+            lng = Float(l.coordinate.longitude)
+        }
+        else{
+            lat = 0
+            lng = 0
+        }
+        //location
+        //last location
+        //wenn location null: last location, sonst aktuelle location
+        //durch Stationen, Distanz berechnen und setzen
+        for station in stationsSetInPrefs{
+            station.setDistance(latitude: lat, longitude: lng)
         }
     }
     

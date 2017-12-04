@@ -15,6 +15,7 @@
 		31A859001FBF2A110007C34E /* StationListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A858FF1FBF2A110007C34E /* StationListTableViewCell.swift */; };
 		31A859021FBF2F000007C34E /* StationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A859011FBF2F000007C34E /* StationTableViewController.swift */; };
 		31A859041FBF321D0007C34E /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A859031FBF321D0007C34E /* Station.swift */; };
+		31B3F6B51FD5B02A00A8E6B9 /* StationLoaderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B3F6B41FD5B02A00A8E6B9 /* StationLoaderMock.swift */; };
 		7B7AA58D1FCB369B004F8D4C /* StationLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7AA58C1FCB369B004F8D4C /* StationLoader.swift */; };
 		7BE992351FD34D2C00630B97 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7BE992341FD34D2C00630B97 /* Settings.bundle */; };
 /* End PBXBuildFile section */
@@ -30,6 +31,7 @@
 		31A858FF1FBF2A110007C34E /* StationListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationListTableViewCell.swift; sourceTree = "<group>"; };
 		31A859011FBF2F000007C34E /* StationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationTableViewController.swift; sourceTree = "<group>"; };
 		31A859031FBF321D0007C34E /* Station.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
+		31B3F6B41FD5B02A00A8E6B9 /* StationLoaderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationLoaderMock.swift; sourceTree = "<group>"; };
 		7B7AA58C1FCB369B004F8D4C /* StationLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationLoader.swift; sourceTree = "<group>"; };
 		7BE992341FD34D2C00630B97 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,6 +67,7 @@
 		31A858EC1FBF24390007C34E /* moapk */ = {
 			isa = PBXGroup;
 			children = (
+				31B3F6B41FD5B02A00A8E6B9 /* StationLoaderMock.swift */,
 				31A858ED1FBF24390007C34E /* AppDelegate.swift */,
 				31A858EF1FBF24390007C34E /* StationViewController.swift */,
 				31A858FF1FBF2A110007C34E /* StationListTableViewCell.swift */,
@@ -156,6 +159,7 @@
 				7B7AA58D1FCB369B004F8D4C /* StationLoader.swift in Sources */,
 				31A859041FBF321D0007C34E /* Station.swift in Sources */,
 				31A858F01FBF24390007C34E /* StationViewController.swift in Sources */,
+				31B3F6B51FD5B02A00A8E6B9 /* StationLoaderMock.swift in Sources */,
 				31A859001FBF2A110007C34E /* StationListTableViewCell.swift in Sources */,
 				31A858EE1FBF24390007C34E /* AppDelegate.swift in Sources */,
 			);

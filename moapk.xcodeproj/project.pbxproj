@@ -15,6 +15,7 @@
 		31A859001FBF2A110007C34E /* StationListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A858FF1FBF2A110007C34E /* StationListTableViewCell.swift */; };
 		31A859021FBF2F000007C34E /* StationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A859011FBF2F000007C34E /* StationTableViewController.swift */; };
 		31A859041FBF321D0007C34E /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A859031FBF321D0007C34E /* Station.swift */; };
+		31AC77F01FDE9D4600DB6E8D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31AC77EF1FDE9D4600DB6E8D /* MapKit.framework */; };
 		31B3F6B51FD5B02A00A8E6B9 /* StationLoaderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B3F6B41FD5B02A00A8E6B9 /* StationLoaderMock.swift */; };
 		7B0FB4421FDC7E39007C28D7 /* track.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 7B0FB4411FDC7E39007C28D7 /* track.gpx */; };
 		7B0FB4441FDC83CE007C28D7 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0FB4431FDC83CE007C28D7 /* MapViewController.swift */; };
@@ -33,6 +34,7 @@
 		31A858FF1FBF2A110007C34E /* StationListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationListTableViewCell.swift; sourceTree = "<group>"; };
 		31A859011FBF2F000007C34E /* StationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationTableViewController.swift; sourceTree = "<group>"; };
 		31A859031FBF321D0007C34E /* Station.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
+		31AC77EF1FDE9D4600DB6E8D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		31B3F6B41FD5B02A00A8E6B9 /* StationLoaderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationLoaderMock.swift; sourceTree = "<group>"; };
 		7B0FB4411FDC7E39007C28D7 /* track.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = track.gpx; sourceTree = "<group>"; };
 		7B0FB4431FDC83CE007C28D7 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -45,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31AC77F01FDE9D4600DB6E8D /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +60,7 @@
 				7BE992341FD34D2C00630B97 /* Settings.bundle */,
 				31A858EC1FBF24390007C34E /* moapk */,
 				31A858EB1FBF24390007C34E /* Products */,
+				31AC77EE1FDE9D4600DB6E8D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,6 +90,14 @@
 				7B0FB4431FDC83CE007C28D7 /* MapViewController.swift */,
 			);
 			path = moapk;
+			sourceTree = "<group>";
+		};
+		31AC77EE1FDE9D4600DB6E8D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				31AC77EF1FDE9D4600DB6E8D /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -121,6 +133,11 @@
 					31A858E91FBF24390007C34E = {
 						CreatedOnToolsVersion = 8.3.3;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};

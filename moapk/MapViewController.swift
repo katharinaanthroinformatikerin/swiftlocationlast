@@ -7,19 +7,36 @@
 //
 
 import UIKit
+import MapKit
+import CoreLocation
+
+class MyPin : NSObject, MKAnnotation {
+    var coordinate: CLLocationCoordinate2D
+    var title: String?
+    
+    init(coordinate: CLLocationCoordinate2D, title: String){
+        self.coordinate = coordinate
+        self.title = title
+    }
+}
 
 class MapViewController: UIViewController {
+    var locationManager = CLLocationManager()
+    var pins = [MKAnnotation]()
+    
+    @IBOutlet weak var mapView: MKMapView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        locationManager.requestWhenInUseAuthorization()
+        mapView.userTrackingMode = .follow
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
 
     /*
@@ -32,4 +49,10 @@ class MapViewController: UIViewController {
     }
     */
 
+}
+
+extension Double {
+    static func random() -> Double {
+        return Double(arc4random_uniform(1000000)) / 1000000.0;
+    }
 }

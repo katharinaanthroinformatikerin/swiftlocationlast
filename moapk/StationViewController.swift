@@ -22,6 +22,8 @@ class StationViewController: UIViewController {
     @IBOutlet weak var distanceLabel: UILabel!
     
     @IBOutlet weak var iconImage: UIImageView!
+        
+    
     
     
     var station: Station?
@@ -99,7 +101,7 @@ class StationViewController: UIViewController {
             return "\(String(format: "%.2f ", distance/1000)) \(km)"
         }
         else {
-            return "\(String(format: ".2f", distance)) \(m)"
+            return "\(String(format: "%.2f", distance)) \(m)"
         }
         
     }

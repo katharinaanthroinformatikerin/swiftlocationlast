@@ -29,7 +29,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="lines" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dgN-Mj-FXr">
-                                <rect key="frame" x="222" y="118" width="141" height="529"/>
+                                <rect key="frame" x="222" y="118" width="141" height="356"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -81,11 +81,16 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogw-Sa-6Gn">
+                                <rect key="frame" x="16" y="482" width="359" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Details" id="MhL-PU-CQZ"/>
                     <connections>
+                        <outlet property="detailMapView" destination="ogw-Sa-6Gn" id="9u4-n1-00H"/>
                         <outlet property="distanceLabel" destination="Gje-7c-UYB" id="piv-wr-vFy"/>
                         <outlet property="iconImage" destination="Lws-Ej-Rya" id="JDN-16-2K6"/>
                         <outlet property="latitudeLabel" destination="fFc-xq-lz7" id="yue-H3-UMM"/>

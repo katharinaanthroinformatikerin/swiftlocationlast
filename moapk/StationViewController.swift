@@ -7,6 +7,17 @@
 //
 
 import UIKit
+import MapKit
+
+class MyPin2 : NSObject, MKAnnotation {
+    var coordinate: CLLocationCoordinate2D
+    var title: String?
+    
+    init(coordinate: CLLocationCoordinate2D, title: String){
+        self.coordinate = coordinate
+        self.title = title
+    }
+}
 
 class StationViewController: UIViewController {
     
@@ -22,7 +33,8 @@ class StationViewController: UIViewController {
     @IBOutlet weak var distanceLabel: UILabel!
     
     @IBOutlet weak var iconImage: UIImageView!
-        
+    
+    @IBOutlet weak var detailMapView: MKMapView!
     
     
     
@@ -92,7 +104,13 @@ class StationViewController: UIViewController {
         station?.lines = subArray1 + subArray2
         
         self.linesTextView.text = station?.lines.joined(separator: "\r\n")
-    }
+        
+        let span = MKCoordinateSpanMake(0.005, 0.005)
+        
+        let pin = MyPin2(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees((station?.location.latitude)!), longitude: CLLocationDegrees((station?.location.longitude)!)), title: (station?.name)!)
+        self.detailMapView.addAnnotation(pin)
+        let region = MKCoordinateRegion(center: pin.coordinate, span: span)
+        detailMapView.setRegion(region, animated: true)    }
     
     func formatDistance(distance: Double) -> String {
         let km = "km"

@@ -10,22 +10,34 @@ import Foundation
 
 
 //delegate, um Controller über beim Model aufgetretene Ereignisse zu informieren
-
-
+protocol StationDelegateMock {
+    func finishedLoadingStations(_ data: [Station])
+}
 struct StationLoaderMock {
     var stations = [Station]()
+    var usStations = [Station]()
     
     
     var delegate : StationDelegate?
-    init(delegate:StationDelegate){
+    init(delegate: StationDelegate){
         self.delegate = delegate
     }
     
-    func load(){
-       
+    mutating func load(){
+        for i : Int in 0...2 {
+            let station = Station(
+                name: "Station" + i.description,
+                location: Location(latitude: 48.134861, longitude: 16.283298),
+                lines: ["A31","A32", "A33"])
+            usStations.append(station)
+        }
+        
+        delegate?.finishedLoadingStations(usStations)
     }
     
-    private func parseFeatures(_ features: [[String:Any]]){
+    //delegate?.finishedLoadingStations(usStations)
+    
+    /*private func parseFeatures(_ features: [[String:Any]]){
         var stations=[String:Station]()
         
         for feature in features {
@@ -79,9 +91,9 @@ struct StationLoaderMock {
         for station in usStations{
             //removes duplicate lines by transforming into a set and then back to an array
             station.lines = Array(Set(station.lines))
-        }
+        }*/
         
         //sortiert in alphabetischer Reihenfolge
-        delegate?.finishedLoadingStations(usStations.sorted{ $0.name < $1.name })
-    }
+    //delegate?.finishedLoadingStations(usStations)
+    
 }

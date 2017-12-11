@@ -16,6 +16,8 @@
 		31A859021FBF2F000007C34E /* StationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A859011FBF2F000007C34E /* StationTableViewController.swift */; };
 		31A859041FBF321D0007C34E /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A859031FBF321D0007C34E /* Station.swift */; };
 		31B3F6B51FD5B02A00A8E6B9 /* StationLoaderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B3F6B41FD5B02A00A8E6B9 /* StationLoaderMock.swift */; };
+		7B0FB4421FDC7E39007C28D7 /* track.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 7B0FB4411FDC7E39007C28D7 /* track.gpx */; };
+		7B0FB4441FDC83CE007C28D7 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0FB4431FDC83CE007C28D7 /* MapViewController.swift */; };
 		7B7AA58D1FCB369B004F8D4C /* StationLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7AA58C1FCB369B004F8D4C /* StationLoader.swift */; };
 		7BE992351FD34D2C00630B97 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7BE992341FD34D2C00630B97 /* Settings.bundle */; };
 /* End PBXBuildFile section */
@@ -32,6 +34,8 @@
 		31A859011FBF2F000007C34E /* StationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationTableViewController.swift; sourceTree = "<group>"; };
 		31A859031FBF321D0007C34E /* Station.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		31B3F6B41FD5B02A00A8E6B9 /* StationLoaderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationLoaderMock.swift; sourceTree = "<group>"; };
+		7B0FB4411FDC7E39007C28D7 /* track.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = track.gpx; sourceTree = "<group>"; };
+		7B0FB4431FDC83CE007C28D7 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		7B7AA58C1FCB369B004F8D4C /* StationLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationLoader.swift; sourceTree = "<group>"; };
 		7BE992341FD34D2C00630B97 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,12 +76,14 @@
 				31A858EF1FBF24390007C34E /* StationViewController.swift */,
 				31A858FF1FBF2A110007C34E /* StationListTableViewCell.swift */,
 				31A859011FBF2F000007C34E /* StationTableViewController.swift */,
+				7B0FB4411FDC7E39007C28D7 /* track.gpx */,
 				31A859031FBF321D0007C34E /* Station.swift */,
 				7B7AA58C1FCB369B004F8D4C /* StationLoader.swift */,
 				31A858F11FBF24390007C34E /* Main.storyboard */,
 				31A858F41FBF24390007C34E /* Assets.xcassets */,
 				31A858F61FBF24390007C34E /* LaunchScreen.storyboard */,
 				31A858F91FBF24390007C34E /* Info.plist */,
+				7B0FB4431FDC83CE007C28D7 /* MapViewController.swift */,
 			);
 			path = moapk;
 			sourceTree = "<group>";
@@ -143,6 +149,7 @@
 			files = (
 				7BE992351FD34D2C00630B97 /* Settings.bundle in Resources */,
 				31A858F81FBF24390007C34E /* LaunchScreen.storyboard in Resources */,
+				7B0FB4421FDC7E39007C28D7 /* track.gpx in Resources */,
 				31A858F51FBF24390007C34E /* Assets.xcassets in Resources */,
 				31A858F31FBF24390007C34E /* Main.storyboard in Resources */,
 			);
@@ -162,6 +169,7 @@
 				31B3F6B51FD5B02A00A8E6B9 /* StationLoaderMock.swift in Sources */,
 				31A859001FBF2A110007C34E /* StationListTableViewCell.swift in Sources */,
 				31A858EE1FBF24390007C34E /* AppDelegate.swift in Sources */,
+				7B0FB4441FDC83CE007C28D7 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

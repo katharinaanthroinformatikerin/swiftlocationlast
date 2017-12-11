@@ -14,10 +14,9 @@ class StationListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var iconImageView: UIImageView!
     
-    @IBOutlet weak var heading: UILabel!
-    
     @IBOutlet weak var location: UILabel!
-
+    //@IBOutlet weak var heading: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

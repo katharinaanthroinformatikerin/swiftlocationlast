@@ -17,11 +17,13 @@ class StationTableViewController: UITableViewController, StationDelegate, CLLoca
     var stations = [Station]()
     var stationsSetInPrefs = [Station]()
     var stationLoader : StationLoader? = nil
+    var stationLoaderMock : StationLoaderMock? = nil
     
     var strainPrefs : Bool?
     var subwayPrefs : Bool?
     
     var locationManager = CLLocationManager()
+    private var currentLocation: Location? = nil
     
     @IBOutlet weak var heading: UILabel!
     @IBOutlet weak var location: UILabel!
@@ -33,20 +35,19 @@ class StationTableViewController: UITableViewController, StationDelegate, CLLoca
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //Setting default values for app settings
         UserDefaults.standard.register(defaults: ["strain_preference" : true, "subway_preference" : true])
         strainPrefs = UserDefaults.standard.bool(forKey: "strain_preference")
         subwayPrefs = UserDefaults.standard.bool(forKey: "subway_preference")
-        print("1 Preferences")
-        print(strainPrefs)
-        print(subwayPrefs)
+        //print("1 Preferences")
+        //print(strainPrefs)
+        //print(subwayPrefs)
         
         //Registering ViewController for updates concerning the app settings
         NotificationCenter.default.addObserver(forName: UserDefaults.didChangeNotification, object: nil, queue: nil, using: settingsChanged)
-        print("2 Preferences")
-        print(strainPrefs)
-        print(subwayPrefs)
+        //print("2 Preferences")
+        //print(strainPrefs)
+        //print(subwayPrefs)
         
         
         
@@ -70,15 +71,15 @@ class StationTableViewController: UITableViewController, StationDelegate, CLLoca
         
         //UserDefaults.standard.synchronize()
         
-        print("Settings changed")
-        print(UserDefaults.standard.bool(forKey: "strain_preference"))
-        print(UserDefaults.standard.bool(forKey: "subway_preference"))
+        //print("Settings changed")
+        //print(UserDefaults.standard.bool(forKey: "strain_preference"))
+        //print(UserDefaults.standard.bool(forKey: "subway_preference"))
         
         strainPrefs = UserDefaults.standard.bool(forKey: "strain_preference")
         subwayPrefs = UserDefaults.standard.bool(forKey: "subway_preference")
-        print("3 Preferences")
-        print(strainPrefs)
-        print(subwayPrefs)
+        //print("3 Preferences")
+        //print(strainPrefs)
+        //print(subwayPrefs)
         
         setStationsSetInPrefs(using: stations)
         self.tableView.reloadData()
@@ -90,7 +91,7 @@ class StationTableViewController: UITableViewController, StationDelegate, CLLoca
         locationManager.distanceFilter = 50 // meter
         locationManager.requestWhenInUseAuthorization()
         
-        print(locationManager.location?.coordinate as Any)
+        //print(locationManager.location?.coordinate as Any)
         
         /*
         location.text = ""
@@ -106,6 +107,7 @@ class StationTableViewController: UITableViewController, StationDelegate, CLLoca
         if CLLocationManager.locationServicesEnabled(){
             locationManager.startUpdatingLocation()
         }
+        self.tableView.reloadData()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -125,12 +127,27 @@ class StationTableViewController: UITableViewController, StationDelegate, CLLoca
         //last location
         //wenn location null: last location, sonst aktuelle location
         //durch Stationen, Distanz berechnen und setzen
-        for station in stationsSetInPrefs{
-            station.setDistance(latitude: lat, longitude: lng)
-        }
+        print(self.currentLocation)
+        self.currentLocation = Location(latitude: lat, longitude: lng)
+        setLocation(location: self.currentLocation!)
+        
+        self.tableView.reloadData()
+
     }
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: [CLLocation]){
+    private func setLocation(location: Location) {
+        DispatchQueue.global(qos: .background).async {
+            for station in self.stationsSetInPrefs{
+                station.setDistance(latitude: location.latitude, longitude: location.longitude)
+            }
+            DispatchQueue.main.async {
+                self.stationsSetInPrefs = self.stationsSetInPrefs.sorted{ Float($0.distance!) < Float($1.distance!) }
+            }
+        }
+        self.tableView.reloadData()
+    }
+    
+    private func locationManager(_ manager: CLLocationManager, didFailWithError error: [CLLocation]){
     
     }
     
@@ -180,10 +197,33 @@ class StationTableViewController: UITableViewController, StationDelegate, CLLoca
         else if (station.isSBahn()){
             cell.iconImageView.image = UIImage(named: "image_sbahn")
         }
-
+        
+        var formattedDistance = ""
+        if let d = station.distance {
+            let rawDistance : Double = d
+            formattedDistance = formatDistance(distance: rawDistance)
+        }
+        //print("DISTANCE: ")
+        //print(station.distance)
+        DispatchQueue.main.async {
+            cell.location.text = "\(String(describing: formattedDistance))"
+        }
+        
         return cell
     }
     
+    func formatDistance(distance: Double) -> String {
+        let km = "km"
+        let m = "m"
+        if(distance/1000 > 1.0 ){
+            return "\(String(format: "%.2f ", distance/1000)) \(km)"
+        }
+        else {
+            return "\(String(format: ".2f", distance)) \(m)"
+        }
+        
+    }
+
 
     /*
     // Override to support conditional editing of the table view.
@@ -258,21 +298,23 @@ class StationTableViewController: UITableViewController, StationDelegate, CLLoca
         
         stations = data
         
-        setStationsSetInPrefs(using: data)
-        
-        
-        
         DispatchQueue.main.async{
+            self.setStationsSetInPrefs(using: data)
+            if let loc = self.currentLocation {
+                self.setLocation(location: loc)
+            }
             self.tableView.reloadData()
             self.refreshControl?.endRefreshing()
         }
     }
     
     func setStationsSetInPrefs(using usstations: [Station]){
-        print("4 Preferences")
-        print(strainPrefs)
-        print(subwayPrefs)
+        //print("4 Preferences")
+        //print(strainPrefs)
+        //print(subwayPrefs)
         stationsSetInPrefs = [Station]()
+    
+        
         if (strainPrefs == true && subwayPrefs == true) {
             stationsSetInPrefs = usstations
             
@@ -291,5 +333,7 @@ class StationTableViewController: UITableViewController, StationDelegate, CLLoca
         } else {
             stationsSetInPrefs = [Station]()
         }
+        
+        self.tableView.reloadData()
     }
 }

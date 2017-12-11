@@ -19,6 +19,11 @@ class StationViewController: UIViewController {
     
     @IBOutlet weak var linesTextView: UITextView!
     
+    @IBOutlet weak var distanceLabel: UILabel!
+    
+    @IBOutlet weak var iconImage: UIImageView!
+    
+    
     var station: Station?
     
     
@@ -29,6 +34,29 @@ class StationViewController: UIViewController {
         self.stationnameLabel.text = station?.name
         self.latitudeLabel.text = floatToString(float: (station!.location.latitude))
         self.longitudeLabel.text = floatToString(float: (station!.location.longitude))
+        
+        var formattedDistance = ""
+        
+        if let d = station?.distance {
+            let rawDistance : Double = d
+            formattedDistance = formatDistance(distance: rawDistance)
+        }
+
+        self.distanceLabel.text = "\(String(describing: formattedDistance))"
+        
+        if let s = station {
+            if (s.isSBahn() && s.isUBahn()) {
+            iconImage.image = UIImage(named: "image_subahn")
+        }
+        else if (s.isUBahn()) {
+            iconImage.image = UIImage(named: "image_ubahn")
+        }
+        else if (s.isSBahn()){
+            iconImage.image = UIImage(named: "image_sbahn")
+            }
+        }
+        
+        
         
         let unsortedLines = station?.lines
         let sortingPreference = "SU".characters.map {$0}
@@ -62,6 +90,18 @@ class StationViewController: UIViewController {
         station?.lines = subArray1 + subArray2
         
         self.linesTextView.text = station?.lines.joined(separator: "\r\n")
+    }
+    
+    func formatDistance(distance: Double) -> String {
+        let km = "km"
+        let m = "m"
+        if(distance/1000 > 1.0 ){
+            return "\(String(format: "%.2f ", distance/1000)) \(km)"
+        }
+        else {
+            return "\(String(format: ".2f", distance)) \(m)"
+        }
+        
     }
     
     private func floatToString(float: Float) -> String{
